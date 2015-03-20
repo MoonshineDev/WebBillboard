@@ -1,14 +1,22 @@
 ﻿using CommandLine;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Announcements.CLI
 {
+    /// <summary>
+    /// Contains the Main function, this is the starting point of the CLI application.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// The starting point of the CLI application.
+        /// </summary>
+        /// <param name="args">Input arguments from CLI into the application.</param>
         static void Main(string[] args)
         {
             #region Initialize variables
@@ -35,7 +43,9 @@ namespace Announcements.CLI
             #region Execute
             try
             {
+                var sw = Stopwatch.StartNew();
                 invokedVerbOptions.Run();
+                Console.Out.WriteLine("{0} - {1}", sw.Elapsed, "TOTAL");
             }
             catch (Exception e)
             {

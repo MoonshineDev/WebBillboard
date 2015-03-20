@@ -33,9 +33,15 @@ namespace Announcements.Business.Service
         {
             if (string.IsNullOrWhiteSpace(message))
                 throw new ArgumentException("Message required");
+            var user = "System";
+            var time = DateTime.Now;
             var dbModel = _BaseRepository.Create<Announcement>();
-            dbModel.Time = DateTime.Now;
+            dbModel.Time = time;
             dbModel.Message = message;
+            dbModel.CreatedBy = user;
+            dbModel.CreatedOn = time;
+            dbModel.ChangedBy = user;
+            dbModel.ChangedOn = time;
             _BaseRepository.UpdateEntity(dbModel, EntityState.Added);
             _BaseRepository.SaveChanges();
             return new MessageModel(dbModel);

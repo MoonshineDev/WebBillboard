@@ -43,8 +43,16 @@ namespace Announcements.Infrastructure.Repository
 
         public void SaveChanges()
         {
-            // TODO: Track DB Changes, analyze DB errors, update ChangeEntity properties
-            _DbContext.SaveChanges();
+            try
+            {
+                // TODO: Track DB Changes, analyze DB errors, update ChangeEntity properties
+                _DbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
         }
     }
 }
