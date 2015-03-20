@@ -8,7 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace Announcements.Web.IoC
+namespace Announcements.CLI.IoC
 {
     public class IoCRegistry : Registry
     {

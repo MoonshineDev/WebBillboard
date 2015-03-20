@@ -1,4 +1,5 @@
 ﻿using Announcements.Business.Contract;
+using Announcements.Infrastructure.Repository;
 using Announcements.Web.IoC;
 using Announcements.Web.Models;
 using System;
