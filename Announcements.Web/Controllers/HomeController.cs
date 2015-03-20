@@ -1,4 +1,6 @@
-﻿using Announcements.Web.Models;
+﻿using Announcements.Business.Contract;
+using Announcements.Web.IoC;
+using Announcements.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,10 +34,12 @@ namespace Announcements.Web.Controllers
         {
             ViewBag.Message = "Below is a list of all current announcements.";
 
-            var result = Enumerable.Empty<MessageModel>();
-            result = new MessageModel[] {
-                new MessageModel { Time = DateTime.Now, Message = "Hello World"}
-            };
+            var messageService = MyContainer.GetInstance<IMessageService>();
+            var announcements = messageService.GetAnnoucements();
+            var result = announcements.Select(x => new MessageViewModel {
+                Time = x.Time,
+                Message = x.Message,
+            });
             ViewBag.Announcements = result;
 
             return View();

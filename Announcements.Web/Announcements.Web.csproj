@@ -40,6 +40,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Net4">
+      <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -163,9 +169,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IoC\IoCRegistry.cs" />
+    <Compile Include="IoC\MyContainer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Message\MessageModel.cs" />
+    <Compile Include="Models\Message\MessageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -227,6 +235,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Announcements.Business\Announcements.Business.csproj">
+      <Project>{6f932461-df6b-44bb-8969-49dead8872ce}</Project>
+      <Name>Announcements.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
