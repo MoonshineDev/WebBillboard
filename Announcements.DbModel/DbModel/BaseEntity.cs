@@ -7,14 +7,22 @@ using System.Threading.Tasks;
 
 namespace Announcements.DbModel.DbModel
 {
-    public class BaseEntity
+    /// <summary>
+    /// Base class of all entities in the database.
+    /// </summary>
+    public abstract class BaseEntity
     {
+        /// <summary>
+        /// Unique identifier of the entity.
+        /// </summary>
         [Key]
         public Guid Id { get; set; }
 
+        #region ctor
         public BaseEntity()
         {
             Id = Guid.NewGuid();
         }
+        #endregion
     }
 }

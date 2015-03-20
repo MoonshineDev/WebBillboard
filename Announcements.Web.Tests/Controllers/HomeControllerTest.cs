@@ -9,28 +9,43 @@ using Announcements.Web.Controllers;
 
 namespace Announcements.Web.Tests.Controllers
 {
+    /// <summary>
+    /// Unit test class for ASP.NET home controller.
+    /// </summary>
     [TestClass]
     public class HomeControllerTest
     {
+        #region singleton
         private HomeController _homeController = null;
         public HomeController homeController { get {
             if (_homeController == null)
                 _homeController = new HomeController();
             return homeController;
         } }
+        #endregion
 
+        /// <summary>
+        /// Unit test for Index action.
+        /// </summary>
         [TestMethod]
         public void Index()
         {
             AssertControllerAction(controller => controller.Index());
         }
 
+        /// <summary>
+        /// Unit test for Message action.
+        /// </summary>
         [TestMethod]
         public void Message()
         {
             AssertControllerAction(controller => controller.Message());
         }
 
+        /// <summary>
+        /// Test that the given action does not evaluate an error.
+        /// </summary>
+        /// <param name="action">Action to be tested.</param>
         private void AssertControllerAction(Func<HomeController, ActionResult> action)
         {
             // Arrange

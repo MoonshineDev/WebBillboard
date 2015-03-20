@@ -11,15 +11,27 @@ using System.Threading.Tasks;
 
 namespace Announcements.Business.Service
 {
+    /// <summary>
+    /// Implementation of Message Service, handles announcement messages on the billboard.
+    /// </summary>
     public class MessageService : IMessageService
     {
+        /// <summary>
+        /// Connection to the database.
+        /// </summary>
         private BaseRepository _BaseRepository;
 
+        #region ctor
         public MessageService(BaseRepository baseRepository)
         {
             _BaseRepository = baseRepository;
         }
+        #endregion
 
+        /// <summary>
+        /// Get list of all announcement messages on the billboard.
+        /// </summary>
+        /// <returns>List of messages ordered by time posted.</returns>
         public IEnumerable<MessageModel> GetAnnoucements()
         {
             return _BaseRepository
@@ -29,6 +41,11 @@ namespace Announcements.Business.Service
                 .ToArray();
         }
 
+        /// <summary>
+        /// Post a new announcement message on the billboard.
+        /// </summary>
+        /// <param name="message">The content of the announcement message.</param>
+        /// <returns>The announcement as posted on the billboard.</returns>
         public MessageModel PostAnnouncement(string message)
         {
             if (string.IsNullOrWhiteSpace(message))

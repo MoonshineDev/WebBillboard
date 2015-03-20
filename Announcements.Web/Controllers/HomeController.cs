@@ -14,9 +14,14 @@ namespace Announcements.Web.Controllers
     {
         public ActionResult Index()
         {
+            // Redirect to message action.
             return RedirectToAction("Message");
         }
 
+        /// <summary>
+        /// Lists all announcement messages on the billboard.
+        /// </summary>
+        /// <returns>Razor resource which is later parsed into HTML.</returns>
         public ActionResult Message()
         {
             ViewBag.Message = "Below is a list of all current announcements.";

@@ -13,6 +13,13 @@ namespace Announcements.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Special route in order to match the example given by the assignment.
+            routes.MapRoute(
+                name: "message",
+                url: "message",
+                defaults: new { controller = "Home", action = "Message", id = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

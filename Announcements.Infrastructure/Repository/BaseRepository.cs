@@ -10,8 +10,14 @@ using System.Threading.Tasks;
 
 namespace Announcements.Infrastructure.Repository
 {
+    /// <summary>
+    /// Repository which communicates with the billboard database.
+    /// </summary>
     public class BaseRepository
     {
+        /// <summary>
+        /// Database context for the billboard database.
+        /// </summary>
         private AnnouncementsDbContext _DbContext;
 
         #region ctor
@@ -21,26 +27,68 @@ namespace Announcements.Infrastructure.Repository
         }
         #endregion
 
+        /// <summary>
+        /// Add a local entity to the database.
+        /// </summary>
+        /// <typeparam name="T">The type of the entity.</typeparam>
+        /// <param name="entity">The entity itself.</param>
+        /// <returns>The entity which was added.</returns>
         public T Add<T>(T entity) where T : BaseEntity
-        { return _DbContext.Set<T>().Add(entity); }
+        {
+            if (entity == null)
+                throw new ArgumentNullException("Entity required.");
+            return _DbContext.Set<T>().Add(entity);
+        }
 
+        /// <summary>
+        /// Create a entity on the database.
+        /// </summary>
+        /// <typeparam name="T">The type of the entity.</typeparam>
+        /// <returns>THe entity which was created.</returns>
         public T Create<T>() where T : BaseEntity
         { return _DbContext.Set<T>().Create(); }
 
-        public IEnumerable<T> LoadAll<T>() where T : BaseEntity
+        /// <summary>
+        /// Load all entities into memory.
+        /// </summary>
+        /// <typeparam name="T">The type of the entity.</typeparam>
+        /// <returns>A complete list of entities.</returns>
+        public T[] LoadAll<T>() where T : BaseEntity
         { return _DbContext.Set<T>().ToArray(); }
 
+        /// <summary>
+        /// Load all matching entities into memory.
+        /// </summary>
+        /// <typeparam name="T">The type of the entity.</typeparam>
+        /// <param name="predicate">Only return entities which match this predicate.</param>
+        /// <returns>A complete list of matching entities.</returns>
         public IEnumerable<T> LoadWhere<T>(Expression<Func<T, bool>> predicate) where T : BaseEntity
-        { return _DbContext.Set<T>().Where(predicate).ToArray(); }
+        {
+            if (predicate == null)
+                throw new ArgumentNullException("Predicate required.");
+            return _DbContext.Set<T>().Where(predicate).ToArray();
+        }
 
+        /// <summary>
+        /// Update the entry state within Entity Framework of the given entity.
+        /// </summary>
+        /// <typeparam name="T">The type of the entity.</typeparam>
+        /// <param name="entity">The entity which is referred to.</param>
+        /// <param name="state">The new entry state of the entity.</param>
+        /// <returns>The old entry state of the entity.</returns>
         public EntityState UpdateEntity<T>(T entity, EntityState state) where T : BaseEntity
         {
+            if (entity == null)
+                throw new ArgumentNullException("Entity required.");
             var entry = _DbContext.Entry<T>(entity);
             var oldState = entry.State;
             entry.State = state;
             return oldState;
         }
 
+        /// <summary>
+        /// Update database with the eventual changes in the local entities.
+        /// </summary>
         public void SaveChanges()
         {
             try
@@ -50,7 +98,6 @@ namespace Announcements.Infrastructure.Repository
             }
             catch (Exception e)
             {
-                
                 throw;
             }
         }
