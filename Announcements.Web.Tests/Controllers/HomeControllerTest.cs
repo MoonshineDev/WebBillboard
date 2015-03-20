@@ -26,18 +26,6 @@ namespace Announcements.Web.Tests.Controllers
         }
 
         [TestMethod]
-        public void About()
-        {
-            AssertControllerAction(controller => controller.About());
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            AssertControllerAction(controller => controller.Contact());
-        }
-
-        [TestMethod]
         public void Message()
         {
             AssertControllerAction(controller => controller.Message());
