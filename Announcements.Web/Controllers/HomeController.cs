@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Announcements.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -30,6 +31,12 @@ namespace Announcements.Web.Controllers
         public ActionResult Message()
         {
             ViewBag.Message = "Below is a list of all current announcements.";
+
+            var result = Enumerable.Empty<MessageModel>();
+            result = new MessageModel[] {
+                new MessageModel { Time = DateTime.Now, Message = "Hello World"}
+            };
+            ViewBag.Announcements = result;
 
             return View();
         }

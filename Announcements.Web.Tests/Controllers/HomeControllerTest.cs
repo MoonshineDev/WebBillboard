@@ -43,13 +43,13 @@ namespace Announcements.Web.Tests.Controllers
             AssertControllerAction(controller => controller.Message());
         }
 
-        private void AssertControllerAction(Func<HomeController, ActionResult> Act)
+        private void AssertControllerAction(Func<HomeController, ActionResult> action)
         {
             // Arrange
             var controller = homeController;
 
             // Act
-            var result = Act(controller) as ViewResult;
+            var result = action(controller) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

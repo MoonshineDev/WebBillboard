@@ -1,0 +1,20 @@
+﻿
+body {
+}
+
+.AnnouncementList {
+    border-left: 2px solid #000000;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 10px;
+}
+
+.Announcement {
+    border: 1px dashed black;
+    border-radius: 5px 5px;
+    width: 450px;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
